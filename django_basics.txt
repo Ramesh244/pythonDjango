@@ -1,0 +1,137 @@
+1.difference between micro and full stack frame work
+micro frame work:
+1.it is simple and easy to do
+2.url routing is rest full often
+3.a good choice for small application
+4.use wsgi and work through http request and response
+
+full stack frame work:
+1.it is complex and does the heavy lifting
+2.need not to be rest full
+3. can be used make large applications
+4.Provide libraries, template engines, database management etc
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+2.difference between project and application
+project:
+1.Project could be defined as the entire application, containing apps to perform specific tasks.
+2.one project we can create multiple applications
+
+applications:
+1.application performs particular task
+2.applications we have to create with in the project
+------------------------------------------------------------------------------------------------------------------------------------------------------
+3.what are the files are created in project and application
+project files:
+1.__init__.py: The folder which contains __init__.py file is considered as python package
+2.asgi.py: ASGI (Asynchronous Server Gateway Interface) is a spiritual successor to WSGI. ASGI provides standard for both asynchronous and synchronous apps. 
+3.settings.py: This file contains all the information or data about project settings.
+4.urls.py: This file contains information of urlattached with application
+5.wsgi.py: WSGI (Web Server Gateway Interface) provided a standard for synchronous Python apps. 
+6.manage.py –manage.py is automatically created in each Django project. It is Django’s command-line utility also sets the DJANGO_SETTINGS_MODULE environment 
+variable so that it points to your project’s settings.py file. Generally, when working on a single Django project, it’s easier to use manage.py than django-admin
+
+application files:
+1.__init__.py: The folder which contains __init__.py file is considered as Python Package
+2.admin.py: This file is used to register sqltables so we could perform CRUD operation 
+from Admin Application. Admin Application is provided by Django to perform CRUD operation
+3.apps.py: This file is used to configapp
+4.models.py: This file is used to create our own model class later these classes will be converted into database table by Django for our application.
+5.tests.py: This is files is used to create tests
+6.views.py: This file is used to create view. We write all the business logic related code in this file
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+4.Advantages and Disadvantages of django
+Advantages:
+1.Django is a Framework which contains a lot of default code
+2.We need to import default codes in to our project and we are adding very less code as per our requirements.
+3.It takes less development time.
+4.It takes less development cost.
+5.In Django maintenance time is less comparing to other frameworks
+6.More default code more advantages
+
+Disadvantages:
+1.Most programmers dislike Django web development because of the lack of conventions.
+2.Unlike Ruby on Rails, the framework doesn’t have a set of principles that developers can follow for web development.
+3.It makes things difficult for developers who have worked on frameworks with Convention over Configuration.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+5.name few synchronous and asynchronous
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+6.what is url dispatcher
+To design urls for application you create python module informally named urls.py. This module is pure Python code and is a mapping between URL path expressions 
+to view functions.This mapping can be as short or as long as needed. It can reference other mappings. It’s pure Python code so it can be constructed dynamically.
+urls.py
+urlpatterns= [path(route, view, kwargs=None, name=None) ]
+
+urls.py
+urlpatterns= [path(‘learndj/’, views.learn_django),]
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+7. what is path, render, HttpResponse, url patterns
+path:
+path(route, view, kwargs=None, name=None) -It returns an element for inclusion in urlpatterns
+urls.py
+urlpatterns= [path(route, view, kwargs=None, name=None) ]
+
+urls.py
+urlpatterns= [path(‘learndj/’, views.learn_Django, {‘check’: ‘OK’ }, name=‘learn_django’),]
+
+render:
+render(): Function -It combines a given template with a given context dictionary and returns an HttpResponseobject with that rendered text.
+Syntax:-render(request, template_name, context=dict_name, content_type=MIME_type, status=None, using=None)
+
+HttpResponse:
+First, we import the class HttpResponse from the django.http module.
+The view returns an HttpResponse object that contains the generated response. 
+Each view function is responsible for returning an HttpResponse object.
+
+urlpattern:
+views.py
+from django.httpimport HttpResponse
+def learn_django(request):
+	return HttpResponse(‘Hello Django’)
+
+urls.py
+from course import views as cv
+urlpatterns= [path(‘learndj/’, cv.learn_django)
+
+urls.py
+from course.viewsimport learn_django
+urlpatterns= [path(‘learndj/’, learn_django)]
+1.Reduces the dependency of Application
+2.Enhance Application performance. 
+3.Reusability of application becomes easy.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+7.Explanation on setting.py
+settings.py:
+A Django settings file contains all the configuration of your Django installation. This document explains how settings work and which settings are available.
+
+1.BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))BASE_DIR is a variable which contains abspathof base directory/project folder
+2.SECRET_KEY = '9f=3m6^04@*z1dn*!utxe^yn!3vpkjtbbg0&t^+_)cxaigm*7p’This is used to provide cryptographic signing, and should be set to a unique, unpredictable value.
+django-admin startprojectautomatically adds a randomly-generated SECRET_KEY to each new project.
+3.DEBUG = True If DEBUG is False, you also need to properly set the ALLOWED_HOSTS setting. Failing to do so will result in all requests being returned as 
+“Bad Request (400)”.
+4.ALLOWED_HOSTS = [ ]A list of strings representing the host/domain names that this Django site can serve. Values in this list can be fully qualifiednames in 
+which case they will be matched against the request’s Host header exactly (case-insensitive, not including port). 
+5.INSTALLED_APPS = [
+'django.contrib.admin',
+'django.contrib.auth',
+'django.contrib.contenttypes',
+'django.contrib.sessions',
+'django.contrib.messages',
+'django.contrib.staticfiles’,
+]
+A list of strings designating all applications that are enabled in this Django installation. Each string should be a dotted Python path to an application 
+configuration class (preferred) or a package containing an application.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+8. what is MVT Architecture
+MVT architecture is a model,view,template. A user send request to the route it sends to the django frame work from their it send the request to the view which is
+server side logics which get and post request and response it send the request to the model which is connected with database it can create update alter and it send 
+response to the views views will send the request to the template which is presentation layer which we can write html,json,xml etc and it also send response to the 
+view the view will give the response to the url then the user can see the output.
